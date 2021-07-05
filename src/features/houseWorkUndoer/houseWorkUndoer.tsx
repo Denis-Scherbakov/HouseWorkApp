@@ -1,7 +1,6 @@
 import { Switch, Route, Link } from "react-router-dom";
 import { TodaysHousework } from "./components/todaysHousework";
 import styles from "styled-components";
-import { houseWorkSlice } from "./houseWorkSlice";
 
 const MainWrapper = styles.div`
   display: flex;

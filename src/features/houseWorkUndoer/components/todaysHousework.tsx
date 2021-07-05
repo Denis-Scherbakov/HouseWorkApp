@@ -1,8 +1,9 @@
-import { useState } from "react";
 import { CompleteTaskMenu } from "./completeTaskMenu";
 import styles from "styled-components";
 import { TodoI } from "../houseWorkSlice";
 import { useAppSelector } from "../../../app/hooks";
+import { showMenu } from "../houseWorkSlice";
+import { useAppDispatch } from "../../../app/hooks";
 
 const StyledHouseworkList = styles.ul`
   display: flex;
@@ -77,11 +78,13 @@ const StyledCompleteTaskBtn = styles.button`
 
 export const TodaysHousework = () => {
   const state = useAppSelector((state) => state.houseWork.todos);
-  const [active, setActive] = useState(true);
+  const dispatch = useAppDispatch();
 
   const toggleCompleteTaskMenu = (
     event: React.MouseEvent<HTMLButtonElement>
-  ) => {};
+  ) => {
+    dispatch(showMenu(event.currentTarget.value));
+  };
 
   return (
     <StyledHouseworkList>
@@ -99,9 +102,10 @@ export const TodaysHousework = () => {
               <StyledListItemTask>{item.title}</StyledListItemTask>
             </ItemTaskWrapper>
             <StyledCompleteTaskBtn
+              value={item.id}
               onClick={toggleCompleteTaskMenu}
             ></StyledCompleteTaskBtn>
-            {active === true && <CompleteTaskMenu />}
+            {item.showMenu === true && <CompleteTaskMenu />}
           </StyledHouseWorkItem>
         ))}
     </StyledHouseworkList>
