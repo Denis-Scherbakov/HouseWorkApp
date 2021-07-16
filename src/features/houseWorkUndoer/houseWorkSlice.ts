@@ -8,6 +8,13 @@ export interface TodoI {
   showMenu: Boolean;
 }
 
+export interface AccountsI {
+  id: string;
+  points: number;
+  name: string;
+  status: "done" | "not done";
+}
+
 export interface houseWorkState {
   todos: TodoI[];
 }
