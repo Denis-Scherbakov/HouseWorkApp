@@ -114,7 +114,6 @@ export const CompleteTaskMenu = ({ title, value }: CompleteTaskMenuProps) => {
   const toggleCompleteTaskMenu = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
-    console.log(event.currentTarget.value);
     dispatch(toggleMenu(event.currentTarget.value));
   };
 

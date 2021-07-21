@@ -10,13 +10,20 @@ export interface TodoI {
 
 export interface AccountsI {
   id: string;
-  points: number;
+  pictureIndex: number;
   name: string;
-  status: "done" | "not done";
+  age: number;
+  points: number;
+  password: string;
+  status: "logged in" | "logged off";
+  showAcc: boolean;
+  showPasswordInput: boolean;
+  isAdmin: boolean;
 }
 
 export interface houseWorkState {
   todos: TodoI[];
+  accounts: AccountsI[];
 }
 
 const initialState: houseWorkState = {
@@ -64,6 +71,44 @@ const initialState: houseWorkState = {
       showMenu: false,
     },
   ],
+  accounts: [
+    {
+      id: "0",
+      pictureIndex: 0,
+      name: "Lily",
+      age: 11,
+      points: 54,
+      password: "lilly123",
+      status: "logged off",
+      showAcc: true,
+      showPasswordInput: false,
+      isAdmin: false,
+    },
+    {
+      id: "1",
+      pictureIndex: 1,
+      name: "Jack",
+      age: 31,
+      points: 0,
+      password: "yaPozhiloy",
+      status: "logged off",
+      showAcc: true,
+      showPasswordInput: false,
+      isAdmin: true,
+    },
+    {
+      id: "2",
+      pictureIndex: 2,
+      name: "Mary",
+      age: 10,
+      points: 27,
+      password: "marymary",
+      status: "logged off",
+      showAcc: true,
+      showPasswordInput: false,
+      isAdmin: false,
+    },
+  ],
 };
 
 export const houseWorkSlice = createSlice({
@@ -86,8 +131,30 @@ export const houseWorkSlice = createSlice({
         return state;
       });
     },
+    toggleAccountEnter: (state, action) => {
+      state.accounts.map((item) => {
+        if (item.id !== action.payload) {
+          return (item.showAcc = !item.showAcc);
+        } else if (item.id === action.payload) {
+          return (item.showPasswordInput = !item.showPasswordInput);
+        }
+        return state;
+      });
+    },
+    logginInAccount: (state, action) => {
+      state.accounts.map((item) => {
+        if (
+          action.payload === item.password &&
+          item.showPasswordInput === true
+        ) {
+          return (item.status = "logged in");
+        }
+        return state;
+      });
+    },
   },
 });
 
 export default houseWorkSlice.reducer;
-export const { toggleMenu, completeTask } = houseWorkSlice.actions;
+export const { toggleMenu, completeTask, toggleAccountEnter, logginInAccount } =
+  houseWorkSlice.actions;
