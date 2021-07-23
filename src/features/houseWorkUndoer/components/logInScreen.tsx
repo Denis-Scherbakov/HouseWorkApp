@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import styles from "styled-components";
-import { toggleAccountEnter, logginInAccount } from "../houseWorkSlice";
+import {
+  toggleAccountEnter,
+  logginInAccount,
+  cancelRedirectToLogin,
+} from "../houseWorkSlice";
 import { useAppSelector } from "../../../app/hooks";
 import { useAppDispatch } from "../../../app/hooks";
 import Lily from "../images/Lilly.png";
@@ -109,6 +113,7 @@ export const LoginScreen = () => {
   const [type, setType] = useState("password");
 
   const toggleAccounts = (event: React.MouseEvent<HTMLButtonElement>) => {
+    dispatch(cancelRedirectToLogin(event.currentTarget.value));
     dispatch(toggleAccountEnter(event.currentTarget.value));
   };
 
@@ -117,6 +122,7 @@ export const LoginScreen = () => {
   };
 
   const signIn = (event: React.MouseEvent<HTMLButtonElement>) => {
+    dispatch(cancelRedirectToLogin(event.currentTarget.value));
     dispatch(logginInAccount(event.currentTarget.value));
   };
 

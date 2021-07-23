@@ -2,8 +2,8 @@ import { CompleteTaskMenu } from "./completeTaskMenu";
 import { HouseWorkCompleted } from "./houseWorkCompleted";
 import styles from "styled-components";
 import { TodoI } from "../houseWorkSlice";
-import { useAppSelector } from "../../../app/hooks";
 import { toggleMenu } from "../houseWorkSlice";
+import { useAppSelector } from "../../../app/hooks";
 import { useAppDispatch } from "../../../app/hooks";
 
 const StyledHouseworkList = styles.ul`

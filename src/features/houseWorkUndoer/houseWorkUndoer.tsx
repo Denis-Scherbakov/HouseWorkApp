@@ -1,17 +1,11 @@
 import { Switch, Route, Link, Redirect } from "react-router-dom";
 import { TodaysHousework } from "./components/todaysHousework";
+import { AccountsList } from "./components/accountsList";
 import { LoginScreen } from "./components/logInScreen";
 import styles from "styled-components";
 
 const MainWrapper = styles.div`
   display: flex;
-`;
-
-const StyledAccountsList = styles.ul`
-  list-style-type: none;
-  background-color: red;
-  margin-left: 48px;
-  margin-top: 96px;
 `;
 
 const StyledHouseWorkList = styles.ul`
@@ -58,9 +52,7 @@ export const HouseWorkUndoer = () => {
       </Switch>
       <Switch>
         <Route path={["/Main", "/todaysHouseWork"]}>
-          <StyledAccountsList>
-            <li>4444444444</li>
-          </StyledAccountsList>
+          <AccountsList />
           <StyledHouseWorkList>
             <StyledHouseWorkItem>
               <StyledTodayHouseWorkLink to="/todaysHouseWork">

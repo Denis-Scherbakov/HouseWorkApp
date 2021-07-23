@@ -19,6 +19,7 @@ export interface AccountsI {
   showAcc: boolean;
   showPasswordInput: boolean;
   isAdmin: boolean;
+  leave: boolean;
 }
 
 export interface houseWorkState {
@@ -78,11 +79,12 @@ const initialState: houseWorkState = {
       name: "Lily",
       age: 11,
       points: 54,
-      password: "lilly123",
+      password: "1",
       status: "logged off",
       showAcc: true,
       showPasswordInput: false,
       isAdmin: false,
+      leave: false,
     },
     {
       id: "1",
@@ -90,11 +92,12 @@ const initialState: houseWorkState = {
       name: "Jack",
       age: 31,
       points: 0,
-      password: "yaPozhiloy",
+      password: "2",
       status: "logged off",
       showAcc: true,
       showPasswordInput: false,
       isAdmin: true,
+      leave: false,
     },
     {
       id: "2",
@@ -102,11 +105,12 @@ const initialState: houseWorkState = {
       name: "Mary",
       age: 10,
       points: 27,
-      password: "marymary",
+      password: "3",
       status: "logged off",
       showAcc: true,
       showPasswordInput: false,
       isAdmin: false,
+      leave: false,
     },
   ],
 };
@@ -152,9 +156,45 @@ export const houseWorkSlice = createSlice({
         return state;
       });
     },
+    logOff: (state, action) => {
+      state.accounts.map((item) => {
+        if (action.payload === item.id) {
+          return (item.status = "logged off");
+        }
+        return state;
+      });
+    },
+    redirectToLogin: (state, action) => {
+      state.accounts.map((item) => {
+        if (action.payload === item.id) {
+          return (item.leave = true);
+        }
+        return state;
+      });
+    },
+    cancelRedirectToLogin: (state, action) => {
+      state.accounts.map((item) => {
+        if (
+          action.payload === item.password &&
+          item.showPasswordInput === true
+        ) {
+          return (item.leave = false);
+        } else if (item.id !== action.payload) {
+          return (item.leave = false);
+        }
+        return state;
+      });
+    },
   },
 });
 
 export default houseWorkSlice.reducer;
-export const { toggleMenu, completeTask, toggleAccountEnter, logginInAccount } =
-  houseWorkSlice.actions;
+export const {
+  toggleMenu,
+  completeTask,
+  toggleAccountEnter,
+  logginInAccount,
+  logOff,
+  redirectToLogin,
+  cancelRedirectToLogin,
+} = houseWorkSlice.actions;
