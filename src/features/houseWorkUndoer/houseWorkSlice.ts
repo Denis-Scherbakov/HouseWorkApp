@@ -20,6 +20,7 @@ export interface AccountsI {
   showPasswordInput: boolean;
   isAdmin: boolean;
   leave: boolean;
+  showEditPoints: boolean;
 }
 
 export interface houseWorkState {
@@ -85,6 +86,7 @@ const initialState: houseWorkState = {
       showPasswordInput: false,
       isAdmin: false,
       leave: false,
+      showEditPoints: false,
     },
     {
       id: "1",
@@ -98,19 +100,21 @@ const initialState: houseWorkState = {
       showPasswordInput: false,
       isAdmin: true,
       leave: false,
+      showEditPoints: false,
     },
     {
       id: "2",
       pictureIndex: 2,
       name: "Mary",
       age: 10,
-      points: 27,
+      points: 270,
       password: "3",
       status: "logged off",
       showAcc: true,
       showPasswordInput: false,
       isAdmin: false,
       leave: false,
+      showEditPoints: false,
     },
   ],
 };
@@ -185,6 +189,24 @@ export const houseWorkSlice = createSlice({
         return state;
       });
     },
+    showEditPoints: (state, action) => {
+      state.accounts.map((item) => {
+        if (action.payload === item.id) {
+          return (item.showEditPoints = !item.showEditPoints);
+        } else {
+          item.showEditPoints = false;
+        }
+        return state;
+      });
+    },
+    editPoints: (state, action) => {
+      state.accounts.map((item) => {
+        if (item.showEditPoints === true) {
+          return (item.points = action.payload);
+        }
+        return state;
+      });
+    },
   },
 });
 
@@ -197,4 +219,6 @@ export const {
   logOff,
   redirectToLogin,
   cancelRedirectToLogin,
+  showEditPoints,
+  editPoints,
 } = houseWorkSlice.actions;

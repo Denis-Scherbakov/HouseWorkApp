@@ -7,6 +7,7 @@ import Lily from "../images/Lilly.png";
 import Jack from "../images/Jack.png";
 import Mary from "../images/Mary.png";
 import Leave from "../images/Leave.png";
+import { AdminAccountList } from "./adminAccountList";
 
 const StyledAccountsList = styles.ul`
   list-style-type: none;
@@ -46,7 +47,7 @@ const StyledAccountPointsWrapper = styles.div`
     position: absolute;
     top: 90px;
     left: 160px;
-    width: 82px;
+    width: 90px;
     height: 40px;
     color: white;
     background-color: #FF8933;
@@ -55,6 +56,7 @@ const StyledAccountPointsWrapper = styles.div`
 const StyledAccountPoints = styles.p`
     margin-top: 5px;
     margin-left: 14px;
+    margin-right: 14px;
     width: 66px;
     height: 20px;
     font-size: 20px;
@@ -78,6 +80,17 @@ const StyledLeaveP = styles.p`
   font-size: 14px;
   cursor: pointer;
   color: #555555;
+`;
+
+const StyledAdminAcc = styles.li`
+  width: 360px;
+  height: 164px;
+  border-radius: 8px;
+  background-color: #FFE8DB;
+`;
+
+const AdminAccountListWrapper = styles.div`
+  margin-top: 80px;
 `;
 
 export const AccountsList = () => {
@@ -121,7 +134,35 @@ export const AccountsList = () => {
             </StyledAccountItem>
           )}
           {item.status === "logged in" && item.isAdmin === true && (
-            <div>555</div>
+            <>
+              <StyledAdminAcc>
+                <AccountInfoWrapper>
+                  <StyledAccountImage
+                    src={srcPicture[item.pictureIndex]}
+                    alt={item.name}
+                  ></StyledAccountImage>
+                  <StyledAccountGreetings>
+                    Hello, {item.name}!
+                  </StyledAccountGreetings>
+                  <StyledLeaveAccountInput
+                    type="checkbox"
+                    value={item.id}
+                    id="Leave"
+                    onChange={leaveAcc}
+                  />
+                  <label htmlFor="Leave">
+                    <StyledLeaveImage
+                      src={Leave}
+                      alt="Leave"
+                    ></StyledLeaveImage>
+                    <StyledLeaveP>Leave</StyledLeaveP>
+                  </label>
+                </AccountInfoWrapper>
+              </StyledAdminAcc>
+              <AdminAccountListWrapper>
+                <AdminAccountList />
+              </AdminAccountListWrapper>
+            </>
           )}
         </>
       ))}

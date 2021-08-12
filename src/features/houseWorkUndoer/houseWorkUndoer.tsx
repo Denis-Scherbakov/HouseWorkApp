@@ -25,6 +25,7 @@ text-decoration: none;
 
 const StyledWaves = styles.svg`
     position: absolute;
+    z-index: -2;
     top: 620px;
     width: 376px;
     height: 316px;
